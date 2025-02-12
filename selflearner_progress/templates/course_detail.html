@@ -1,0 +1,14 @@
+<h1>{{ course.name }}</h1>
+<a href="{% url 'add_topic' course.id %}">Add Topic</a>
+<ul>
+    {% for topic in topics %}
+        <li>
+            {{ topic.name }}
+            <a href="{% url 'toggle_completion' topic.id %}">
+                {% if topic.completed %}✔{% else %}✖{% endif %}
+            </a>
+            <a href="{% url 'delete_topic' topic.id %}" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'course_list' %}">Back</a>

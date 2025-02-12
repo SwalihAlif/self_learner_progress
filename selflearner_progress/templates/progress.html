@@ -1,0 +1,23 @@
+<h1>My Progress</h1>
+<canvas id="progressChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var progressData = {{ progress_data|safe }};
+    var labels = progressData.map(item => item[0]);
+    var completed = progressData.map(item => item[1]);
+    var total = progressData.map(item => item[2]);
+
+    var ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Progress',
+                data: completed,
+                backgroundColor: ['red', 'blue', 'green', 'yellow']
+            }]
+        }
+    });
+</script>
+<a href="{% url 'course_list' %}">Back</a>

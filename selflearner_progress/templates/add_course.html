@@ -1,0 +1,7 @@
+<h2>Add a New Course</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Course Name" required>
+    <button type="submit">Add</button>
+</form>
+<a href="{% url 'course_list' %}">Back</a>

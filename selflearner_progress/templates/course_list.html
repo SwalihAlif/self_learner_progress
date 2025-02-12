@@ -1,0 +1,11 @@
+<h1>My Courses</h1>
+<a href="{% url 'add_course' %}">Add Course</a>
+<ul>
+    {% for course in courses %}
+        <li>
+            <a href="{% url 'course_detail' course.id %}">{{ course.name }}</a>
+            <a href="{% url 'delete_course' course.id %}" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'progress' %}">View Progress</a>
