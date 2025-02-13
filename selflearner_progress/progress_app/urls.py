@@ -7,7 +7,7 @@ urlpatterns = [
     path('course/<int:course_id>/', views.course_detail, name='course_detail'),
     path('course/<int:course_id>/add_topic/', views.add_topic, name='add_topic'),
     path('topic/<int:topic_id>/toggle/', views.toggle_completion, name='toggle_completion'),
-    path('progress/', views.progress_view, name='progress'),
+    path('track_progress/<int:course_id>/', views.track_progress, name='track_progress'),
     path('course/<int:course_id>/delete/', views.delete_course, name='delete_course'),
     path('topic/<int:topic_id>/delete/', views.delete_topic, name='delete_topic'),
 ]

@@ -47,12 +47,25 @@ def delete_topic(request, topic_id):
     topic.delete()
     return redirect('course_detail', course_id=course_id)
 
-def progress_view(request):
-    courses = Course.objects.all()
-    progress_data = []
-    for course in courses:
-        total_topics = course.topic_set.count()
-        complete_topics = course.topic_set.filter(completed=True).count()
-        progress_data.append((course.name, complete_topics, total_topics))
 
-    return render(request, 'progress.html', {'progress_data': progress_data})
+
+# Existing views...
+
+# Existing views...
+
+def track_progress(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    topics = course.topic_set.all()
+    completed_topics = topics.filter(completed=True).count()
+    total_topics = topics.count()
+    remaining_topics = total_topics - completed_topics
+    progress_percentage = (completed_topics / total_topics) * 100 if total_topics > 0 else 0
+
+    return render(request, 'track_progress.html', {
+        'course': course,
+        'completed_topics': completed_topics,
+        'total_topics': total_topics,
+        'remaining_topics': remaining_topics,
+        'progress_percentage': progress_percentage
+    })
+

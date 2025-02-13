@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Your Progress</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        canvas {
+            margin: 20px auto;
+            display: block;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Track Your Progress</h1>
+    <h2>Course: {{ course.name }}</h2>
+    <canvas id="progressChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById('progressChart').getContext('2d');
+        var progressChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Completed', 'Remaining'],
+                datasets: [{
+                    data: [{{ completed_topics }}, {{ remaining_topics }}],
+                    backgroundColor: ['#4CAF50', '#FF6384']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+    <a href="{% url 'course_detail' course.id %}" class="back-button">Back to Course Details</a>
+</body>
+</html>
